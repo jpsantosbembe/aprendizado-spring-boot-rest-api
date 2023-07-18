@@ -27,7 +27,17 @@ public class MathController {
             throw new UnsupportedMathOperationException("Valor não é numérico");
         }
         return convertToDouble(numberOne) - convertToDouble(numberTwo);
+    }
 
+    @RequestMapping(value = "/mul/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+    public Double mul(
+            @PathVariable(value = "numberOne") String numberOne,
+            @PathVariable(value = "numberTwo") String numberTwo
+    ) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Valor não é numérico");
+        }
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
     }
 
     private Double convertToDouble(String strNumber) {
