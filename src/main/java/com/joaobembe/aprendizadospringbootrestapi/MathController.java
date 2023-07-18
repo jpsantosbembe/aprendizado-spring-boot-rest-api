@@ -18,6 +18,18 @@ public class MathController {
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
 
+    @RequestMapping(value = "/sub/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+    public Double sub(
+            @PathVariable(value = "numberOne") String numberOne,
+            @PathVariable(value = "numberTwo") String numberTwo
+    ) throws Exception{
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Valor não é numérico");
+        }
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+
+    }
+
     private Double convertToDouble(String strNumber) {
         String number = strNumber.replaceAll(",", ".");
         if (isNumeric(strNumber)) return Double.parseDouble(number);
